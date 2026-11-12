@@ -1,0 +1,353 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  color: #294b32;
+  background: #c8e8b0;
+  overflow: hidden;
+}
+
+/* SCREENS */
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen.active {
+  display: flex;
+}
+
+#start-screen,
+#choose-screen,
+#victory-screen {
+  background:
+    radial-gradient(circle at 20% 15%,
+      #fff5bc 0%, transparent 30%),
+    linear-gradient(
+      #b7e4cc 0%,
+      #e1f3bd 55%,
+      #90c979 100%
+    );
+}
+
+/* PANELS */
+
+.panel {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 35px;
+  border-radius: 25px;
+  text-align: center;
+  max-width: 850px;
+  width: 100%;
+  box-shadow: 0 10px 35px rgba(43, 88, 42, 0.15);
+}
+
+h1 {
+  color: #367747;
+  font-size: 2.5rem;
+}
+
+h2 {
+  color: #5b915a;
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* BUTTONS */
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn,
+.small-btn {
+  border: none;
+  border-radius: 30px;
+  background: #4e9b62;
+  color: white;
+  font-weight: 800;
+  transition: 0.2s;
+}
+
+.btn {
+  padding: 14px 30px;
+  font-size: 1.1rem;
+}
+
+.small-btn {
+  padding: 9px 18px;
+}
+
+.btn:hover,
+.small-btn:hover {
+  background: #327747;
+  transform: scale(1.04);
+}
+
+/* INSECT SELECTION */
+
+.insects-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.choose-insect-btn {
+  background: #f2fae9;
+  border: 2px solid #a6d2a3;
+  border-radius: 18px;
+  width: 140px;
+  padding: 15px;
+  transition: 0.2s;
+}
+
+.choose-insect-btn:hover {
+  background: #dbefcf;
+  transform: translateY(-5px);
+}
+
+.choose-insect-btn img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.choose-insect-btn span {
+  display: block;
+  margin-top: 8px;
+  font-weight: 800;
+}
+
+/* GAME */
+
+#game-container {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 75% 20%,
+      #fff5bb 0%, transparent 25%),
+    linear-gradient(
+      #b6e7dc 0%,
+      #d6edbd 55%,
+      #83c46b 100%
+    );
+}
+
+.game-header {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  background: rgba(255,255,255,0.92);
+  padding: 15px 25px;
+  border-radius: 20px;
+  text-align: center;
+
+  width: min(90%, 420px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.game-stat {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+/* PROGRESS BAR */
+
+.progress-section {
+  margin: 12px 0;
+}
+
+.progress-track {
+  width: 100%;
+  height: 18px;
+  border-radius: 20px;
+  background: #d6e9cf;
+  overflow: hidden;
+}
+
+#progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #81c784,
+    #2e9148
+  );
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+#remaining {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* BUGS */
+
+.insect {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  z-index: 2;
+  animation: floatBug 2.5s ease-in-out infinite;
+}
+
+.insect img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+@keyframes floatBug {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.insect.caught {
+  animation: caughtBug 0.35s forwards;
+  pointer-events: none;
+}
+
+@keyframes caughtBug {
+  to {
+    transform: scale(0) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+/* CATCHING NET */
+
+.catch-net {
+  position: absolute;
+  width: 140px;
+  height: 170px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 20;
+  transform: translate(-50%, -50%);
+}
+
+.catch-net svg {
+  width: 100%;
+  height: 100%;
+}
+
+.catch-net.swing {
+  animation: netSwing 0.45s ease-out;
+}
+
+@keyframes netSwing {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%)
+      rotate(-35deg) scale(1.3);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%)
+      rotate(15deg) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%)
+      rotate(35deg) scale(0.8);
+  }
+}
+
+/* MILESTONE MESSAGE */
+
+.game-message {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  display: none;
+
+  background: #fff8d9;
+  border-radius: 20px;
+  padding: 20px 30px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* VICTORY */
+
+.victory-panel {
+  border: 4px solid #a9d79e;
+  animation: victoryPop 0.6s ease-out;
+}
+
+#final-time {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #367747;
+}
+
+@keyframes victoryPop {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .panel {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .choose-insect-btn {
+    width: 110px;
+    padding: 8px;
+  }
+
+  .choose-insect-btn img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .insect {
+    width: 60px;
+    height: 60px;
+  }
+}
